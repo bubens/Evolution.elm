@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="evolution.min.js"></script>
+  <title>The Evolution-Game</title>
+  <style>
+  * {
+      	padding: 0;
+      	margin: 0;
+      }
+
+  body {
+  	background: #F0EAD6;
+    font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  h1 {
+    text-align: center;
+  	border-bottom: 1px solid #000000;
+  	width: 1000px;
+  	margin: auto;
+  }
+
+   #sub_header {
+    text-align: center;
+    width: 1000px;
+   	margin: auto;
+   }
+
+  article {
+  	text-align: center;
+  }
+
+  article p {
+  	margin-bottom: 5px;
+  }
+
+  article svg {
+  	width : 100%
+  }
+  </style>
+</head>
+<body>
+  <h1>The Evolution-Game</h1>
+  <div id="sub_header">Simulation of a game I like. Source Code on <a href="https://github.com/bubens/evolution.elm">Github.com</a>.</div>
+<article>
+  <div id="elm_goes_here"></div>
+</article>
+<script>
+  Elm.Main.init({ node: document.querySelector("#elm_goes_here") });
+</script>
+</body>
+</html>
