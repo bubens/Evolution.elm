@@ -35,6 +35,7 @@ type alias Creatures =
 
 type alias Model =
     { creatures : Creatures
+    , finished : Creatures
     , fighters : Dict Int (List ( Creature, Creature ))
     , amount : Int
     , width : Int
@@ -144,6 +145,7 @@ init : () -> ( Model, Cmd Msg )
 init _ =
     initCreatures
         { creatures = []
+        , finished = []
         , amount = 75
         , width = 750
         , height = 750
@@ -384,6 +386,35 @@ flattenTupleList list =
         list
 
 
+findFinished : Model -> Model
+findFinished model =
+    { model
+        | creatures =
+            List.filter
+                (\creature ->
+                    case creature.state of
+                        Finished ->
+                            False
+
+                        _ ->
+                            True
+                )
+                model.creatures
+        , finished =
+            model.finished
+                ++ List.filter
+                    (\creature ->
+                        case creature.state of
+                            Finished ->
+                                True
+
+                            _ ->
+                                False
+                    )
+                    model.creatures
+    }
+
+
 updateFightResults : Int -> List FightResult -> Model -> Model
 updateFightResults time results model =
     let
@@ -445,6 +476,7 @@ update msg model =
             model
                 |> bounceCreatures
                 |> collideCreatures
+                |> findFinished
                 |> findFighters time
                 |> updateCreatures
                 |> organiseFights time
@@ -538,7 +570,7 @@ view model =
                                 ]
                                 [ text "F" ]
                 )
-                model.creatures
+                (model.finished ++ model.creatures)
         )
 
 
